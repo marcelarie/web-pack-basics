@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "sass": "sass --watch source/sass:public/css"
+        "sass": "sass --watch source/sass:public/css",
+        "start": "webpack"
     },
     "repository": {
         "type": "git",
