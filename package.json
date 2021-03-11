@@ -1,0 +1,20 @@
+{
+    "name": "web-pack-basics",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "sass": "sass --watch source/sass:public/css"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/marcelarie/web-pack-basics.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/marcelarie/web-pack-basics/issues"
+    },
+    "homepage": "https://github.com/marcelarie/web-pack-basics#readme"
+}

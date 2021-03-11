@@ -1,0 +1,10 @@
+@use 'colors';
+@use 'text';
+
+body {
+    font-family: text.$roboto;
+}
+
+.border {
+    border: 3px solid colors.$dark-green;
+}
