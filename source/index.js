@@ -1,5 +1,6 @@
 import {images} from './js/module-b.js';
 import {render} from './js/main.js';
+import "./sass/main.scss";
 
 render(images.mario.returnTemplate());
 render(images.mushroom.returnTemplate());
