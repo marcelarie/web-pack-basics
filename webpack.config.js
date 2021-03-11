@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+
 // import {path} from 'path';
 
 module.exports = {
@@ -35,6 +37,30 @@ module.exports = {
                     },
                 },
             },
+            // {
+            //     test: /\.(jpe?g|png|gif|svg)$/i,
+            //     use: [
+            //         {
+            //             loader: 'file-loader', // Or `url-loader` or your other loader
+            //         },
+            //     ],
+            // },
+            {
+                test: /\.svg/,
+                type: 'asset/inline'
+            },
+            {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: false,
+                            name: 'images/[hash]-[name].[ext]'
+                        },
+                    },
+                ],
+            },
         ],
     },
     output: {
@@ -47,6 +73,27 @@ module.exports = {
                 template: './index.html',
             },
         ),
+        new ImageMinimizerPlugin({
+            minimizerOptions: {
+                // Lossless optimization with custom option
+                // Feel free to experiment with options for better result for you
+                plugins: [
+                    ['gifsicle', {interlaced: true}],
+                    ['jpegtran', {progressive: true}],
+                    ['optipng', {optimizationLevel: 5}],
+                    [
+                        'svgo',
+                        {
+                            plugins: [
+                                {
+                                    removeViewBox: false,
+                                },
+                            ],
+                        },
+                    ],
+                ],
+            },
+        }),
     ],
 };
 
