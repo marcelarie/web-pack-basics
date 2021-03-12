@@ -39,11 +39,6 @@ module.exports = {
                 },
             },
             {
-                // rest of PNG, JPG, GIF and SVG images.
-                test: /\.png/,
-                type: 'asset/resource',
-            },
-            {
                 //  .png less than 8KB into a Base64 URL and insert this URL into the Bundle. 
                 test: /\.png/,
                 type: 'asset',
