@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const imageminPngquant = require('imagemin-pngquant');
+
 
 
 module.exports = {
@@ -37,29 +39,25 @@ module.exports = {
                 },
             },
             {
+                // rest of PNG, JPG, GIF and SVG images.
+                test: /\.png/,
+                type: 'asset/resource',
+            },
+            {
                 //  .png less than 8KB into a Base64 URL and insert this URL into the Bundle. 
                 test: /\.png/,
-                type: 'asset/inline',
-                parser: {
-                    maxSize: 8 * 1024 // 8kb
-                }
+                type: 'asset',
             },
             {
                 //  .svg less than 12KB into a Base64 URL 
                 test: /\.svg/,
-                type: 'asset/inline',
+                type: 'asset',
                 parser: {
-                    maxSize: 12 * 1024 // 12kb
-                }
+                    dataUrlCondition: {
+                        maxSize: 12 * 1024 // 12kb
+                    },
+                },
             },
-            // {
-            //     //  rest of PNG, JPG, GIF and SVG images.
-            //     test: /\.jpg/,
-            //     type: 'asset/resource',
-            //     generator: {
-            //         filename: 'static/[hash][ext][query]'
-            //     }
-            // },
         ],
     },
     output: {
@@ -79,12 +77,8 @@ module.exports = {
                 plugins: [
                     ['gifsicle', {interlaced: true}],
                     ['jpegtran', {progressive: true}],
-                    ['optipng', {optimizationLevel: 5}],
-                    ['mozjpeg', {quality: 10}],
-                    ['pngquant', {
-                        quality: 1,
-                        speed: 4
-                    }],
+                    ['mozjpeg', {quality: 1}],
+                    ['pngquant', {quality: 0.1, speed: 4}],
                     [
                         'svgo',
                         {
