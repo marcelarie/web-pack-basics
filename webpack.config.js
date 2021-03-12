@@ -78,13 +78,17 @@ module.exports = {
                     ['gifsicle', {interlaced: true}],
                     ['jpegtran', {progressive: true}],
                     ['mozjpeg', {quality: 1}],
-                    ['pngquant', {quality: 0.1, speed: 4}],
+                    ['pngquant', {
+                        quality: [0.7, 0.9],
+                        speed: 4
+                    }],
                     [
                         'svgo',
                         {
                             plugins: [
                                 {
-                                    removeViewBox: false,
+                                    name: 'removeViewBox',
+                                    active: false,
                                 },
                             ],
                         },
