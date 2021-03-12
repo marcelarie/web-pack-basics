@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
-// import {path} from 'path';
 
 module.exports = {
     entry: './source',
@@ -37,30 +36,30 @@ module.exports = {
                     },
                 },
             },
-            // {
-            //     test: /\.(jpe?g|png|gif|svg)$/i,
-            //     use: [
-            //         {
-            //             loader: 'file-loader', // Or `url-loader` or your other loader
-            //         },
-            //     ],
-            // },
             {
+                //  .png less than 8KB into a Base64 URL and insert this URL into the Bundle. 
+                test: /\.png/,
+                type: 'asset/inline',
+                parser: {
+                    maxSize: 8 * 1024 // 8kb
+                }
+            },
+            {
+                //  .svg less than 12KB into a Base64 URL 
                 test: /\.svg/,
-                type: 'asset/inline'
+                type: 'asset/inline',
+                parser: {
+                    maxSize: 12 * 1024 // 12kb
+                }
             },
-            {
-                test: /\.(png|jpg|gif)$/i,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: false,
-                            name: 'images/[hash]-[name].[ext]'
-                        },
-                    },
-                ],
-            },
+            // {
+            //     //  rest of PNG, JPG, GIF and SVG images.
+            //     test: /\.jpg/,
+            //     type: 'asset/resource',
+            //     generator: {
+            //         filename: 'static/[hash][ext][query]'
+            //     }
+            // },
         ],
     },
     output: {
@@ -81,6 +80,11 @@ module.exports = {
                     ['gifsicle', {interlaced: true}],
                     ['jpegtran', {progressive: true}],
                     ['optipng', {optimizationLevel: 5}],
+                    ['mozjpeg', {quality: 10}],
+                    ['pngquant', {
+                        quality: 1,
+                        speed: 4
+                    }],
                     [
                         'svgo',
                         {
