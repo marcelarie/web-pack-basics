@@ -94,6 +94,7 @@ npm install image-minimizer-webpack-plugin --save-dev
 ```
 This plugin uses imagemin to optimize your images.
 
+#### ImageMinimizerPlugin config
 ```js
 new ImageMinimizerPlugin({
     minimizerOptions: {
@@ -120,6 +121,38 @@ new ImageMinimizerPlugin({
     },
 }),
 ```
+#### Rules for diferent image file types 
+
+```js
+{
+    //  .png less than 8KB into a Base64 URL and 
+    // insert this URL into the Bundle. 
+    test: /\.png/,
+    type: 'asset',
+},
+{
+    //  .svg less than 12KB into a Base64 URL 
+    test: /\.svg/,
+    type: 'asset',
+    parser: {
+        dataUrlCondition: {
+            maxSize: 12 * 1024 // 12kb
+        },
+    },
+},
+```
+
+                        (                      )  
+                      (  (          (  )\ )   (       (    ( /(  
+                      )\))(   '(  ( )\(()/(   )\      )\   )\()) 
+                     ((_)()\ ) )\ )((_)/(_)|(((_)(  (((_)|((_)\  
+                     _(())\_)(|(_|(_)_(_))  )\ _ )\ )\___|_ ((_) 
+                     \ \((_)/ / __| _ ) _ \ (_)_\(_|(/ __| |/ /  
+                      \ \/\/ /| _|| _ \  _/  / _ \  | (__  ' <   
+                       \_/\_/ |___|___/_|   /_/ \_\  \___|_|\_\  
+                                                      
+
+
 
 
 
