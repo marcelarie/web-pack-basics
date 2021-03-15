@@ -8,9 +8,9 @@ const imageminPngquant = require('imagemin-pngquant');
 module.exports = {
     entry: './source',
     mode: 'development',
-    output: {
-        publicPath: "/public/assets/",
-    },
+    // output: {
+    // publicPath: "/public/assets/",
+    // },
     module: {
         rules: [
             {
